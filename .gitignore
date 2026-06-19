@@ -1,0 +1,19 @@
+# Rust / Cargo build artefacts
+/target/
+
+# Cargo.lock:
+# - Commit this file for binary applications (reproducible builds).
+# - For library crates (like Soroban contracts) it is conventionally omitted,
+#   but committing it is recommended for exact deployment reproducibility.
+# Uncomment the line below to ignore it:
+# Cargo.lock
+
+# Compiled WASM outputs
+*.wasm
+*.optimised.wasm
+
+# Editor / OS noise
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db

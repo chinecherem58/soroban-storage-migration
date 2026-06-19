@@ -1,0 +1,25 @@
+[workspace]
+members  = ["contracts/token-migration"]
+resolver = "2"
+
+[workspace.dependencies]
+# Do NOT add features = ["testutils"] here — it leaks test code into release WASM.
+# testutils is enabled only via [dev-dependencies] inside each crate.
+soroban-sdk = { version = "21.7.0" }
+
+# ── Release profile: smallest possible WASM binary ──────────────────────────
+[profile.release]
+codegen-units    = 1
+debug            = 0
+debug-assertions = false
+lto              = true
+opt-level        = "z"       # "z" = size, "s" = balanced size/speed
+overflow-checks  = true      # arithmetic panics stay on for safety
+panic            = "abort"   # required: no unwinding in no_std WASM
+strip            = "symbols"
+
+# ── Profile for `cargo test --profile test-optimized` ───────────────────────
+# Mirrors release optimisations so tests exercise the same code paths.
+[profile.test-optimized]
+inherits  = "release"
+opt-level = "s"

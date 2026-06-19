@@ -1,0 +1,12 @@
+# ── Build target ─────────────────────────────────────────────────────────────
+# Soroban contracts compile to WASM32 for on-chain execution.
+# `cargo build` will use this target automatically.
+[build]
+target = "wasm32-unknown-unknown"
+
+# ── Aliases ──────────────────────────────────────────────────────────────────
+[alias]
+# Build an optimised WASM for deployment
+wasm     = "build --target wasm32-unknown-unknown --release"
+# Run unit + integration tests (host-side, native target — no WASM needed)
+soroban-test = "test --target-dir ./target"
